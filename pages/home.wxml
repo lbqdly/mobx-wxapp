@@ -1,0 +1,14 @@
+<view class="center">
+    <view>name:{{userStore.name}}</view>
+    <view>age:{{userStore.age}}</view>
+    <view>
+        firends:
+        <block wx:for="{{userStore.firends}}" wx:key="{{index}}">
+            {{item}}
+        </block>
+    </view>
+    <button bindtap="tapButton">old</button>
+    <view>{{userStore.sayHi}}</view>
+    <navigator class="link" url="/pages/about?id=1" hover-class="navigator-hover">about</navigator>
+    <view>{{otherStore.other}}</view>
+</view>
