@@ -4,7 +4,7 @@
 #### 用法
 
 js:
-```
+```JavaScript
 import userStore from '../stores/user';
 import otherStore from '../stores/other';
 import {observer} from "../utils/mobx-wxapp";
@@ -17,7 +17,7 @@ Page(observer({userStore, otherStore})({
 
 ```
 wxml:
-```
+```xml
 <view>name:{{userStore.name}}...</view>
 ```
 
