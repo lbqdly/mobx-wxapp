@@ -1,5 +1,5 @@
 # mobx-wxapp-example
-在微信小程序中使用mobx，`mobx-wxapp`简单的提供一个`observer`函数，用法如例所示。
+在微信小程序中使用[mobx](https://github.com/mobxjs/mobx)，`mobx-wxapp`简单的提供了一个`observer`函数，用法如例所示。
 
 #### 用法
 
