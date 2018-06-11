@@ -1,6 +1,6 @@
 {
   "name": "mobx-wxapp-example",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "mobx for wxapp/weapp/wechat",
   "main": "app.js",
   "scripts": {

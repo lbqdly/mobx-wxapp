@@ -1,6 +1,9 @@
 import {autorun, toJS} from "./mobx";
 
 function observer(props) {
+    if (typeof props !== 'object') {
+        throw new Error('The props must be a Object');
+    }
     return function (page) {
         const _onLoad = page.onLoad;
         const _onUnload = page.onUnload;

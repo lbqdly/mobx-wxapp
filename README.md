@@ -5,11 +5,11 @@
 
 js:
 ```JavaScript
-import userStore from '../stores/user';
-import otherStore from '../stores/other';
+import store0 from '../stores/store0';
+import store1 from '../stores/store1';
 import {observer} from "../utils/mobx-wxapp";
 
-Page(observer({userStore, otherStore})({
+Page(observer({store0, store1})({
     onLoad() {
     },
     //...
@@ -18,10 +18,10 @@ Page(observer({userStore, otherStore})({
 ```
 wxml:
 ```xml
-<view>name:{{userStore.name}}...</view>
+<view>name:{{store0.age}}...</view>
 ```
 
 ## License
 
-MIT licensed.
+ISC licensed.
 

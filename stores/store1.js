@@ -2,7 +2,7 @@ import {observable} from "../utils/mobx";
 
 const store = observable({
     //...
-    other: 'some...'
+    other: 'so...'
 });
 
 export default store;

@@ -1,8 +1,8 @@
 //app.js
 App({
-    onLaunch() {
+    onLaunch: function (options) {
     },
-    onError(err) {
+    onError: function (err) {
         console.log(err);
     }
 });

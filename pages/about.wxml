@@ -1,3 +1,0 @@
-<view class="center">{{userStore.sayHi}}</view>
-
-<button bindtap="tapReset">reset</button>
