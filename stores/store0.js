@@ -1,4 +1,4 @@
-import {observable, action} from "../utils/mobx";
+import {observable} from "../utils/mobx";
 
 const store = observable({
 

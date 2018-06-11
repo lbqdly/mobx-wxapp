@@ -3,22 +3,44 @@
 
 #### 用法
 
+store:
+```JavaScript
+import {observable} from "../utils/mobx";
+const store = observable({
+        //observable
+        age: 0,
+        //computed
+        get say() {
+            return `i am ${store.age}.`;
+        },
+        //action
+        add() {
+            store.age += 1;
+        }
+    }
+);
+export default store;
+```
 js:
 ```JavaScript
-import store0 from '../stores/store0';
-import store1 from '../stores/store1';
+import store from '../stores/store0';
 import {observer} from "../utils/mobx-wxapp";
 
-Page(observer({store0, store1})({
+Page(observer({store/*,otherStore*/})({
     onLoad() {
     },
     //...
+    tapAdd(){
+        store.add();
+    }
 }));
 
 ```
 wxml:
 ```xml
-<view>name:{{store0.age}}...</view>
+<view>age: {{store.age}}</view>
+<view>{{store.say}}</view>
+<button bindtap="tapAdd">add</button>
 ```
 
 ## License

@@ -2,10 +2,11 @@
 
 <view>{{store.say}}</view>
 
+<button bindtap="tapAdd">add</button>
+
 <navigator class="link"
            url="/pages/page1"
            hover-class="navigator-hover">
     go to page1
 </navigator>
 
-<button bindtap="tapAdd">add</button>
