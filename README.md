@@ -23,7 +23,7 @@ export default store;
 ```
 js:
 ```JavaScript
-import store from '../stores/store0';
+import store from '../stores/store';
 import {observer} from "../utils/mobx-wxapp";
 
 Page(observer({store/*,otherStore*/})({
