@@ -1,4 +1,4 @@
-import {autorun, toJS} from "./mobx";
+import {autorun, toJS, isObservableObject} from "./mobx";
 
 function observer(props) {
     if (typeof props !== 'object') {
@@ -12,6 +12,9 @@ function observer(props) {
                 let data = {};
                 Object.keys(props).forEach(key => {
                     let prop = props[key];
+                    if (!isObservableObject(prop)) {
+                        throw new Error('The props must be a ObservableObject');
+                    }
                     data[key] = {};
                     let displayKeys = Object.getOwnPropertyNames(prop).filter(key => (key !== '$mobx' && typeof prop[key] !== 'function'));
                     displayKeys.forEach(k => {
