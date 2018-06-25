@@ -17,10 +17,10 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/b5156/mobx-wxapp-example.git"
+    "url": "git+https://github.com/b5156/mobx-wxapp.git"
   },
   "bugs": {
-    "url": "https://github.com/b5156/mobx-wxapp-example/issues"
+    "url": "https://github.com/b5156/mobx-wxapp/issues"
   },
-  "homepage": "https://github.com/b5156/mobx-wxapp-example#readme"
+  "homepage": "https://github.com/b5156/mobx-wxapp#readme"
 }
