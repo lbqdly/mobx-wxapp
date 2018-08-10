@@ -1,12 +1,13 @@
 import store0 from '../stores/store0';
 import store1 from '../stores/store1';
-import {observer} from "../utils/mobx-wxapp";
+import { observer } from '../utils/mobx-wxapp';
 
-Page(observer({store0, store1})({
+Page(
+  observer({ store0, store1 })({
     data: {},
-    onLoad() {
-    },
+    onLoad() {},
     tapReset() {
-        store0.reset(0);
+      store0.reset(0);
     }
-}));
+  })
+);

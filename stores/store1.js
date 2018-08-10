@@ -1,8 +1,8 @@
-import {observable} from "../utils/mobx";
+import { observable } from '../utils/mobx';
 
 const store = observable({
-    //...
-    other: 'so...'
+  //...
+  other: 'so...'
 });
 
 export default store;

@@ -1,23 +1,21 @@
-import {observable} from "../utils/mobx";
+import { observable } from '../utils/mobx';
 
 const store = observable({
+  //observable
+  age: 0,
 
-        //observable
-        age: 0,
+  //computed
+  get say() {
+    return `i am ${store.age}.`;
+  },
 
-        //computed
-        get say() {
-            return `i am ${store.age}.`;
-        },
-
-        //action
-        add() {
-            store.age += 1;
-        },
-        reset(n){
-            store.age = n;
-        }
-    }
-);
+  //action
+  add() {
+    store.age += 1;
+  },
+  reset(n) {
+    store.age = n;
+  }
+});
 
 export default store;
