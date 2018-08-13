@@ -12,9 +12,8 @@ function observer(props) {
     const _onLoad = page.onLoad;
     const _onUnload = page.onUnload;
     let timer = null;
-    let lastChangeTime = 0;
-    const MIN_CHANGE_DELAY = 50;
-
+    // production tested, 50ms is the perfect delay
+    const DELAY = 50;
     page.onLoad = function() {
       this._update = autorun(() => {
         let data = {};
@@ -31,9 +30,10 @@ function observer(props) {
             data[key][k] = toJS(prop[k]);
           });
         });
-        throttle(() => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
           this.setData(data);
-        }, this);
+        }, DELAY);
       });
       if (_onLoad) {
         _onLoad.apply(this, arguments);
@@ -47,18 +47,6 @@ function observer(props) {
     };
     return page;
   };
-}
-
-/**
- * throttle (production tested, 50ms is the perfect delay)
- * @param {Function} method
- * @param {Object} context
- */
-function throttle(method, context, delay = 50) {
-  clearTimeout(method.tId);
-  method.tId = setTimeout(function() {
-    method.call(context);
-  }, delay);
 }
 
 export { observer };
