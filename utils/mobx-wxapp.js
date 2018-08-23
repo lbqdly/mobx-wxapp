@@ -6,7 +6,7 @@ import { autorun, toJS, isObservableObject } from "./mobx";
  */
 function observer(props) {
   if (typeof props !== "object") {
-    throw new Error("props must be Object");
+    throw new TypeError("props must be Object");
   }
   return function(page) {
     const _onLoad = page.onLoad;
@@ -17,7 +17,7 @@ function observer(props) {
       Object.keys(props).forEach(key => {
         let prop = props[key];
         if (!isObservableObject(prop)) {
-          throw new Error("props must be ObservableObject");
+          throw new TypeError("props must be ObservableObject");
         }
         this.disposers.push(
           autorun(
