@@ -1,6 +1,6 @@
 # mobx-wxapp
 
-在微信小程序中使用[mobx](https://github.com/mobxjs/mobx)，`mobx-wxapp`简单的提供了一个`inject`函数，用于自动响应被观察数据的更新，用法如例所示。
+在微信小程序中使用[mobx](https://github.com/mobxjs/mobx)，`mobx-wxapp`简单的提供了一个`inject`函数(替换原observer方式)，用于自动响应被观察数据的更新，用法如例所示。
 
 #### 用法
 
