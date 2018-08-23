@@ -1,5 +1,0 @@
-<view>page0 is :{{store0.age}}</view>
-
-<view>{{store1.other}}</view>
-
-<button bindtap="tapReset">reset</button>

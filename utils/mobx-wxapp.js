@@ -1,52 +1,52 @@
 import { autorun, toJS, isObservableObject } from "./mobx";
 
+function observer() {
+  throw new Error("observer is removed,use inject better!");
+}
+
 /**
- * decorator
- * @param {Object} props
+ * 注入store
+ * @param {*this} context
+ * @param {*Object} props
  */
-function observer(props) {
+function inject(context, props) {
   if (typeof props !== "object") {
     throw new TypeError("props must be Object");
   }
-  return function(page) {
-    const _onLoad = page.onLoad;
-    const _onUnload = page.onUnload;
-    const DELAY = 50;
-    page.onLoad = function() {
-      this.disposers = [];
-      Object.keys(props).forEach(key => {
-        let prop = props[key];
-        if (!isObservableObject(prop)) {
-          throw new TypeError("props must be ObservableObject");
-        }
-        this.disposers.push(
-          autorun(
-            () => {
-              const data = {};
-              const displayKeys = Object.getOwnPropertyNames(prop).filter(
-                key => key !== "$mobx" && typeof prop[key] !== "function"
-              );
-              displayKeys.forEach(k => {
-                data[k] = toJS(prop[k]);
-              });
-              this.setData({ [key]: data });
-            },
-            { delay: DELAY }
-          )
-        );
-      });
-      if (_onLoad) {
-        _onLoad.apply(this, arguments);
-      }
-    };
-    page.onUnload = function() {
-      this.disposers.forEach(disposer => disposer());
-      if (_onUnload) {
-        _onUnload.apply(this, arguments);
-      }
-    };
-    return page;
+  const _onUnload = context.onUnload;
+  const DELAY = 50;
+  const disposers = [];
+  context.props = props;
+  Object.keys(props).forEach(key => {
+    let prop = props[key];
+    if (!isObservableObject(prop)) {
+      throw new TypeError("props must be ObservableObject");
+    }
+    disposers.push(
+      autorun(
+        () => {
+          const data = {};
+          const displayKeys = Object.getOwnPropertyNames(prop).filter(
+            key =>
+              key !== "$mobx" &&
+              typeof prop[key] !== "function" &&
+              key !== "__mobxDidRunLazyInitializers"
+          );
+          displayKeys.forEach(k => {
+            data[k] = toJS(prop[k]);
+          });
+          context.setData({ [key]: data });
+        },
+        { delay: DELAY }
+      )
+    );
+  });
+  context.onUnload = function() {
+    disposers.forEach(disposer => disposer());
+    if (_onUnload) {
+      _onUnload.apply(context, arguments);
+    }
   };
 }
 
-export { observer };
+export { observer, inject };
