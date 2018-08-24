@@ -13,7 +13,6 @@ function inject(context, props) {
   if (typeof props !== "object") {
     throw new TypeError("props must be Object");
   }
-  const _onUnload = context.onUnload;
   const DELAY = 50;
   const disposers = [];
   context.props = props;
@@ -41,11 +40,15 @@ function inject(context, props) {
       )
     );
   });
-  context.onUnload = function() {
+  const onUnload = context.onUnload;
+  if (onUnload) {
+    context.onUnload = function() {
+      disposers.forEach(disposer => disposer());
+      onUnload.apply(context, arguments);
+    };
+  }
+  return function() {
     disposers.forEach(disposer => disposer());
-    if (_onUnload) {
-      _onUnload.apply(context, arguments);
-    }
   };
 }
 
