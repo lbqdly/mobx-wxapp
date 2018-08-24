@@ -41,11 +41,15 @@ function inject(context, props) {
       )
     );
   });
-  context.onUnload = function() {
+  const onUnload = context.onUnload;
+  if (onUnload) {
+    context.onUnload = function() {
+      disposers.forEach(disposer => disposer());
+      onUnload.apply(context, arguments);
+    };
+  }
+  return function() {
     disposers.forEach(disposer => disposer());
-    if (_onUnload) {
-      _onUnload.apply(context, arguments);
-    }
   };
 }
 
