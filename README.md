@@ -102,7 +102,7 @@ Component({
 + context:this
 + Object:stores
 
-返回值：disposer:function,一个销毁器函数（在Page中使用时将自动在onUnload生命周期执行,但在Component构造器中使用时请确保在生命周期结束时手动调用此函数）。
+返回值：disposer:function,一个销毁器函数（在Page中使用时将自动在onUnload生命周期执行,但在Component构造器中使用时请确保在生命周期结束时手动调用此函数）。
 
 
 
