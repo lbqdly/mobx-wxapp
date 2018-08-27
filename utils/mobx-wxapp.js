@@ -22,7 +22,7 @@ function inject(context, props) {
     //节流setData
     clearTimeout(timer);
     timer = setTimeout(() => {
-      console.log(temp);
+      //console.log(temp);
       context.setData(temp, () => {
         temp = {};
       });
