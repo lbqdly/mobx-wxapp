@@ -78,6 +78,33 @@ wxml:
 <view>{{another.agex2}}</view>
 <button bindtap="tapAdd">add</button>
 ```
+当然，您也可在Component中使用:
+```JavaScript
+Component({
+  ...
+  ready(){
+    this.disposer = inject(this,{store: store})
+  },
+
+  //请务必在组件生命周期结束前移除!!
+  detached(){
+    this.disposer();
+  }
+  ...
+})
+```
+
+
+
+## API
+### injiect(context,Object)
+参数：
++ context:this
++ Object:stores
+
+返回值：disposer:function,一个销毁器函数（在Page中使用时将自动在onUnload生命周期执行,但在Component构造器中使用时请确保在生命周期结束时手动调用此函数）。
+
+
 
 ## License
 

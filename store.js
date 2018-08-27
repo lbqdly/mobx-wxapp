@@ -1,4 +1,4 @@
-import { observable, decorate, computed, action } from "../utils/mobx";
+import { observable, decorate, computed, action } from "./utils/mobx";
 
 const store = observable({
   //observable
