@@ -1,38 +1,17 @@
 {
-  "_from": "mobx-wxapp",
-  "_id": "mobx-wxapp@1.3.0",
-  "_inBundle": false,
-  "_integrity": "sha512-fALJgU0yJfysx+cTQ7D24ulxhrslE9e+OQ5xqRxezEHDS15V1vS773eJHzOnODQ4LDwanOEHuuXMmixyNlxkeg==",
-  "_location": "/mobx-wxapp",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "tag",
-    "registry": true,
-    "raw": "mobx-wxapp",
-    "name": "mobx-wxapp",
-    "escapedName": "mobx-wxapp",
-    "rawSpec": "",
-    "saveSpec": null,
-    "fetchSpec": "latest"
+  "name": "mobx-wxapp",
+  "version": "1.4.0",
+  "description": "在微信小程序中使用mobx",
+  "main": "utils/mobx-wxapp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
-  "_resolved": "https://registry.npmjs.org/mobx-wxapp/-/mobx-wxapp-1.2.0.tgz",
-  "_shasum": "1447ebb5ad5224ce95fa3b6007cc636ea38f057e",
-  "_spec": "mobx-wxapp",
-  "_where": "/Users/liliangyun/Desktop",
-  "author": {
-    "name": "b5156"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/b5156/mobx-wxapp.git"
   },
-  "bugs": {
-    "url": "https://github.com/b5156/mobx-wxapp/issues"
-  },
-  "bundleDependencies": false,
-  "deprecated": false,
-  "description": "mobx for wxapp/weapp/wechat",
-  "homepage": "https://github.com/b5156/mobx-wxapp#readme",
+  "author": "b5156",
+  "license": "ISC",
   "keywords": [
     "mobx",
     "wechat",
@@ -40,15 +19,8 @@
     "wxapp",
     "miniprogram"
   ],
-  "license": "ISC",
-  "main": "utils/mobx-wxapp.js",
-  "name": "mobx-wxapp",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/b5156/mobx-wxapp.git"
+  "bugs": {
+    "url": "https://github.com/b5156/mobx-wxapp/issues"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "version": "1.2.0"
+  "homepage": "https://github.com/b5156/mobx-wxapp#readme"
 }

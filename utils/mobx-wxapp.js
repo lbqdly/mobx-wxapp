@@ -14,28 +14,27 @@ function inject(context, props) {
     throw new TypeError("props must be Object");
   }
   context.props = props;
-  const DELAY = 30;
-  let timer;
+  const DELAY = 50;
   let temp = {};
+  //节流setData
+  const lazyUpdate = throttle(function() {
+    try {
+      context.setData(temp);
+      temp = {};
+    } catch (error) {
+      console.error(error);
+    }
+  }, DELAY);
   const update = store => {
     Object.assign(temp, store);
-    //节流setData
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      //console.log(temp);
-      context.setData(temp, () => {
-        temp = {};
-      });
-    }, DELAY);
+    lazyUpdate();
   };
-
   const disposers = [];
   Object.keys(props).forEach(key => {
     let prop = props[key];
     if (!isObservableObject(prop)) {
       throw new TypeError("props must be ObservableObject");
     }
-
     disposers.push(
       autorun(() => {
         const data = {};
@@ -64,6 +63,30 @@ function inject(context, props) {
   return function() {
     disposers.forEach(disposer => disposer());
   };
+}
+
+//https://github.com/component/throttle
+function throttle(func, wait) {
+  var ctx, args, rtn, timeoutID; // caching
+  var last = 0;
+
+  return function throttled() {
+    ctx = this;
+    args = arguments;
+    var delta = new Date() - last;
+    if (!timeoutID)
+      if (delta >= wait) call();
+      else timeoutID = setTimeout(call, wait - delta);
+    return rtn;
+  };
+
+  function call() {
+    timeoutID = 0;
+    last = +new Date();
+    rtn = func.apply(ctx, args);
+    ctx = null;
+    args = null;
+  }
 }
 
 export { observer, inject };
