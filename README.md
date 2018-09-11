@@ -97,7 +97,7 @@ Component({
 
 
 ## API
-### injiect(context,Object)
+### inject(context,Object)
 参数：
 + context:this
 + Object:stores
