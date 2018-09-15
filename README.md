@@ -1,6 +1,6 @@
 # mobx-wxapp
 
-在微信小程序中使用[mobx](https://github.com/mobxjs/mobx)，`mobx-wxapp`简单的提供了一个`inject`函数将可观察的数据注入。
+在微信小程序中使用[mobx](https://github.com/mobxjs/mobx)，`mobx-wxapp`简单的提供了一个`inject`函数将可观察的数据注入。
 
 
 #### 用法
