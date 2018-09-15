@@ -1,3 +1,5 @@
+/*https://github.com/b5156/mobx-wxapp*/
+
 import { autorun, toJS, isObservableObject } from "./mobx";
 
 function observer() {

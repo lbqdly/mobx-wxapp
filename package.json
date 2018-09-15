@@ -1,8 +1,8 @@
 {
   "name": "mobx-wxapp",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "在微信小程序中使用mobx",
-  "main": "utils/mobx-wxapp.js",
+  "main": "example/mobx-wxapp.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,5 +22,7 @@
   "bugs": {
     "url": "https://github.com/b5156/mobx-wxapp/issues"
   },
-  "homepage": "https://github.com/b5156/mobx-wxapp#readme"
+  "homepage": "https://github.com/b5156/mobx-wxapp#readme",
+  "dependencies": {
+  }
 }

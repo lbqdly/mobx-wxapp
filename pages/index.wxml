@@ -1,5 +1,0 @@
-<view>age: {{store.age}}</view>
-<view>{{store.say}}</view>
-<view>another: {{another.age}}</view>
-<view>{{another.agex2}}</view>
-<button bindtap="tapAdd">add</button>
