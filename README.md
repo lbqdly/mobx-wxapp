@@ -93,7 +93,7 @@ Component({
     this.disposer = inject(this,{store: store})
   },
 
-  //请务必在组件生命周期结束前移除!!
+  //请务必在组件生命周期结束前执行销毁器!
   detached(){
     this.disposer();
   }
