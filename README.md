@@ -1,11 +1,11 @@
 # mobx-wxapp
 
-在微信小程序中使用[mobx](https://github.com/mobxjs/mobx)，`mobx-wxapp`简单的提供了一个`inject`函数将可观察的数据注入。
+在微信小程序中使用[mobx](https://github.com/mobxjs/mobx)，`mobx-wxapp`简单的提供了一个`inject`函数将可观察的数据注入并在数据变化时自动渲染到页面。
 
 
 #### 用法
 
-`npm install mobx-wxapp`或直接拷贝文件到您的项目。
+`npm install mobx-wxapp`或直接拷贝文件到您的项目。
 
 案例使用了 mobx v4
 
