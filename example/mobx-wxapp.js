@@ -2,15 +2,6 @@
 
 import { autorun, toJS, isObservableObject } from "./mobx";
 
-function observer() {
-  throw new Error("observer is removed,use inject better!");
-}
-
-/**
- * 注入store
- * @param {*this} context
- * @param {*Object} props
- */
 function inject(context, props) {
   if (typeof props !== "object") {
     throw new TypeError("props must be Object");
@@ -91,4 +82,4 @@ function throttle(func, wait) {
   }
 }
 
-export { observer, inject };
+export { inject };

@@ -1,6 +1,6 @@
 {
   "name": "mobx-wxapp",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "在微信小程序中使用mobx",
   "main": "example/mobx-wxapp.js",
   "scripts": {
