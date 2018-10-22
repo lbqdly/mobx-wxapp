@@ -5,7 +5,7 @@
 
 #### 用法
 
-`npm install mobx-wxapp`或直接拷贝文件到您的项目。
+`npm install mobx-wxapp`或直接拷贝文件(example/mobx-wxapp.js)到您的项目。
 
 案例使用了 mobx v4
 
