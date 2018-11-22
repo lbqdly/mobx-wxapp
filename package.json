@@ -1,7 +1,7 @@
 {
   "name": "mobx-wxapp",
-  "version": "1.4.2",
-  "description": "在微信小程序中使用mobx",
+  "version": "1.4.3",
+  "description": "在小程序中使用mobx",
   "main": "example/mobx-wxapp.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,7 +17,8 @@
     "wechat",
     "weapp",
     "wxapp",
-    "miniprogram"
+    "miniprogram",
+    "computed"
   ],
   "bugs": {
     "url": "https://github.com/b5156/mobx-wxapp/issues"

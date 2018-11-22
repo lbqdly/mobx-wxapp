@@ -7,45 +7,19 @@
 
 `npm install mobx-wxapp`或直接拷贝文件(example/mobx-wxapp.js)到您的项目。
 
-案例使用了 mobx v4
+案例使用了 mobx.js v4.6.0 (因mobx5使用了小程序不支持的ES6 proxy)
 
 store:
 
 ```JavaScript
-//global.store.js
-import { observable, decorate, computed, action } from "./mobx";
-class GlobalStore {
-  name = "mobx";
-  get sname() {
-    return this.name.split("").join("-");
-  }
-}
-decorate(GlobalStore, {
-  num: observable,
-  sname: computed
+//global.js
+import { observable} from "./mobx";
+
+const globalStore = observable({
+  name: "mobx example"
 });
-//导出为单例
-const globalStore = new GlobalStore();
+
 export default globalStore;
-
-
-//index.store.js
-import { observable, decorate, computed, action } from "./mobx";
-class Store {
-  seconds = 0;
-  get color() {
-    return this.seconds % 2 === 0 ? "red" : "green";
-  }
-  tick() {
-    this.seconds += 1;
-  }
-}
-decorate(Store, {
-  seconds: observable,
-  color: computed,
-  tick: action
-});
-export default Store;
 ```
 
 page:
@@ -53,22 +27,32 @@ page:
 ```JavaScript
 //pages/index.js
 import { inject } from "../mobx-wxapp";
-import Store from "./index.store";
-import globalStore from "../global.store";
+import { observable, computed, action, decorate } from "../mobx";
+import globalStore from "../global";
 
+// store
+class Store {
+  seconds = 0;
+  get color() {
+    return this.seconds % 2 === 0 ? "red" : "green";
+  }
+  // 递增
+  tick = () => {
+    this.seconds += 1;
+  };
+}
+decorate(Store, {
+  seconds: observable,
+  color: computed,
+  tick: action
+});
+
+// page
 Page({
-  onLoad(options) {
-    inject(this, {
-      store: new Store(),
-      globalStore
-    });
-
-    this.timer = setInterval(() => {
-      this.props.store.tick();
-    }, 1000);
-  },
-  onUnload() {
-    clearInterval(this.timer);
+  onLoad() {
+    inject(this, { store: new Store(), globalStore });
+    const { store } = this.props;
+    setInterval(store.tick, 1000);
   }
   //...
 });
@@ -78,7 +62,7 @@ wxml:
 
 ```xml
 <!-- pages/index.wxml -->
-<view>{{globalStore.sname}}</view>
+{{globalStore.name}}:
 <view style="color:{{store.color}}">
     seconds:{{store.seconds}}
 </view>
@@ -110,7 +94,7 @@ Component({
 - context:this
 - Object:stores
 
-返回值：disposer:function,一个销毁器函数（在 Page 中使用时将自动在 onUnload 生命周期执行,但在 Component 构造器中使用时请确保在生命周期结束时手动调用此函数）。
+返回一个销毁器函数（在 Page 中使用时将自动在 onUnload 生命周期执行,但在 Component 构造器中使用时请确保在生命周期结束时手动调用此函数）。
 
 ## License
 

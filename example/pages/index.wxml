@@ -1,4 +1,4 @@
-<view>{{globalStore.sname}}</view>
+{{globalStore.name}}:
 <view style="color:{{store.color}}">
     seconds:{{store.seconds}}
 </view>

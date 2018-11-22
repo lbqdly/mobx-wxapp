@@ -1,13 +1,13 @@
 /*https://github.com/b5156/mobx-wxapp*/
 
 import { autorun, toJS, isObservableObject } from "./mobx";
+const DELAY = 50;
 
 function inject(context, props) {
   if (typeof props !== "object") {
-    throw new TypeError("props must be Object");
+    throw new TypeError("参数必须是一个 Object 对象");
   }
   context.props = props;
-  const DELAY = 50;
   let temp = {};
   //节流setData
   const lazyUpdate = throttle(function() {
@@ -26,7 +26,7 @@ function inject(context, props) {
   Object.keys(props).forEach(key => {
     let prop = props[key];
     if (!isObservableObject(prop)) {
-      throw new TypeError("props must be ObservableObject");
+      throw new TypeError("参数必须是一个 ObservableObject 对象");
     }
     disposers.push(
       autorun(() => {
