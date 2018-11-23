@@ -12,7 +12,7 @@
 store:
 
 ```JavaScript
-//global.js
+//global.js 多页面共享
 import { observable} from "./mobx";
 
 const globalStore = observable({
