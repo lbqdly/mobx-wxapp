@@ -26,10 +26,7 @@ page:
 
 ```JavaScript
 //pages/index.js
-import { inject } from "../mobx-wxapp";
 import { observable, computed, action, decorate } from "../mobx";
-import globalStore from "../global";
-
 // store
 class Store {
   seconds = 0;
@@ -47,6 +44,8 @@ decorate(Store, {
   tick: action
 });
 
+import { inject } from "../mobx-wxapp";
+import globalStore from "../global";
 // page
 Page({
   onLoad() {
