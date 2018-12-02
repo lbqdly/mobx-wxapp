@@ -8,12 +8,12 @@
 
 ### 安装
 
-`npm install mobx-wxapp`安装项目到本地 或 直接拷贝文件(example/mobx-wxapp.js)到您的项目。
+`npm install mobx-wxapp`安装项目到本地 或 直接拷贝文件(example/mobx-wxapp.js)到您的项目。
 
 (案例使用了 mobx.js v4.6.0 ,因mobx5使用了小程序暂不支持的ES6 proxy)
 
 ### 用法
-#### 局部store
+#### 局部store
 page:
 
 ```JavaScript
@@ -79,7 +79,7 @@ Component({
 ```JavaScript
 // global.store.js
 // 定义一个全局store
-const globalStore = ({
+const globalStore = ({
   title:'mini program'
 })
 export default globalStore
@@ -128,7 +128,7 @@ decorate(Store, {
 
 Page({
   onUnload(){
-    // 在卸载页面时销毁 globalStore.title 依赖
+    // 在卸载页面时销毁 globalStore.title 依赖
     disposer()
   },
   onLoad() {
@@ -151,7 +151,7 @@ Page({
 
 返回一个销毁器函数（在 Page 中使用时将自动在 onUnload 生命周期执行,但在 Component 构造器中使用时请确保在生命周期结束时手动调用此函数）。
 
-感谢[westore](https://github.com/Tencent/westore)共享的JSON Diff库代码。
+感谢[westore](https://github.com/Tencent/westore)共享的JSON Diff库代码。
 
 ## License
 
