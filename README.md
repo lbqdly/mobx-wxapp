@@ -8,7 +8,7 @@
 
 ### 安装
 
-`npm install mobx-wxapp`安装项目到本地 或 直接拷贝文件(example/mobx-wxapp.js)到您的项目。
+`npm install mobx-wxapp` 安装项目到本地 或 直接拷贝文件(example/mobx-wxapp.js)到您的项目。
 
 (案例使用了 mobx.js v4.6.0 ,因mobx5使用了小程序暂不支持的ES6 proxy)
 
