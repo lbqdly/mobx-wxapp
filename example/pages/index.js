@@ -4,6 +4,7 @@ import globalStore from "../global";
 
 // store
 class Store {
+  name = "liliangyun";
   seconds = 0;
   get color() {
     return this.seconds % 2 === 0 ? "red" : "green";
@@ -14,6 +15,7 @@ class Store {
   };
 }
 decorate(Store, {
+  name: observable,
   seconds: observable,
   color: computed,
   tick: action
@@ -24,7 +26,9 @@ Page({
   onLoad() {
     inject(this, { store: new Store(), globalStore });
     const { store } = this.props;
-    setInterval(store.tick, 1000);
+    setInterval(function() {
+      store.tick();
+    }, 1000);
   }
   //...
 });

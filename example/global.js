@@ -1,7 +1,7 @@
 import { observable} from "./mobx";
 
 const globalStore = observable({
-  name: "mobx example"
+  name: "mini program"
 });
 
 export default globalStore;
