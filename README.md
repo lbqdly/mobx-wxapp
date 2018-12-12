@@ -1,11 +1,11 @@
 # mobx-wxapp
 
-在小程序中使用[mobx](https://github.com/mobxjs/mobx)，`inject`函数可将被观察的数据高效的绑定到小程序视图,现在您可以在小程序中使用的mobx的所有能力了。
+在小程序中使用[mobx](https://github.com/mobxjs/mobx)，`inject`函数可将被观察的数据高效的绑定到小程序视图,现在您可以在小程序中使用的mobx的所有能力了。
 
 
 ### 安装
 
-`npm install mobx-wxapp` 安装项目到本地 或 直接拷贝文件(example/mobx-wxapp.js)到您的项目。
+`npm install mobx-wxapp` 安装项目到本地 或 直接拷贝文件(example/mobx-wxapp.js)到您的项目。
 
 (案例使用了 mobx.js v4.6.0 ,因mobx5使用了小程序暂不支持的ES6 proxy)
 
@@ -16,7 +16,6 @@ pages/index.js:
 ```JavaScript
 
 import { observable, computed, action, decorate } from "../mobx"
-import { inject } from "../mobx-wxapp"
 
 // 定义一个 store
 class Store {
@@ -34,6 +33,7 @@ decorate(Store, {
   tick: action
 });
 
+import { inject } from "../mobx-wxapp"
 
 Page({
   onLoad() {
