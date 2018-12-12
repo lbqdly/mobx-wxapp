@@ -1,9 +1,6 @@
 # mobx-wxapp
 
-在小程序中使用[mobx](https://github.com/mobxjs/mobx)，`inject`函数可将被观察的数据绑定到视图，现在您可以在小程序中使用强大的mobx了。
-+ 简单，仅有一个api
-+ 灵活，自由组织您的store
-+ 高效，高性能的setData机制
+在小程序中使用[mobx](https://github.com/mobxjs/mobx)，`inject`函数可将被观察的数据高效的绑定到小程序视图,现在您可以在小程序中使用的mobx的所有能力了。
 
 
 ### 安装
@@ -13,15 +10,15 @@
 (案例使用了 mobx.js v4.6.0 ,因mobx5使用了小程序暂不支持的ES6 proxy)
 
 ### 用法
-#### 局部store
-page:
+
+pages/index.js:
 
 ```JavaScript
-//pages/index.js
+
 import { observable, computed, action, decorate } from "../mobx"
 import { inject } from "../mobx-wxapp"
 
-// store
+// 定义一个 store
 class Store {
   seconds = 0;
   get color() {
@@ -35,28 +32,62 @@ decorate(Store, {
   seconds: observable,
   color: computed,
   tick: action
-})
+});
 
-// page
+
 Page({
   onLoad() {
-    inject(this, { store: new Store(),/*支持多个 store */ })
-    const { store } = this.props
-    setInterval(store.tick, 1000)
+    // 在此注入store
+    inject(this, { store: new Store() });
+  },
+  add() {
+    // 可从 props 获取引用
+    const { store } = this.props;
+    store.tick();
   }
-  //...
-})
+});
+
 ```
 
-wxml:
+pages/index.wxml:
 
 ```xml
-<!-- pages/index.wxml -->
-<view style="color:{{store.color}}">
-    seconds:{{store.seconds}}
-</view>
+<view style="color:{{color}}"> seconds:{{ seconds }} </view>
+<button bindtap="add">add</button>
+```
+----------
+
+#### 全局store
+您也可以定义一个全局store，然后绑定到page。
+
+global.js:
+```JavaScript
+// 定义一个全局store
+import { observable} from "./mobx";
+
+const globalStore = observable({
+  title: "mobx-wxapp example"
+});
+
+export default globalStore;
 ```
 
+
+pages/index.js:
+```JavaScript
++ import globalStore from '../global'
+
+Page({
+  onLoad() {
+    // 值得注意的是多个store中重名的属性将被覆盖
+    + inject(this, { store: new Store(), globalStore });
+  }
+})
+```
+```xml
++ <view>{{ title }}</view>
+```
+-------
 当然，您也可在 Component 中使用:
 
 ```JavaScript
@@ -74,84 +105,13 @@ Component({
 })
 ```
 
-#### 全局store
-您也可以定义一个全局store，然后注入到page。
-```JavaScript
-// global.store.js
-// 定义一个全局store
-const globalStore = ({
-  title:'mini program'
-})
-export default globalStore
-```
-```JavaScript
-// pageA.js
-import globalStore from './global'
-
-Page({
-  onLoad() {
-    inject(this, { globalStore,/*store : new Store() */ });
-    // ...
-  }
-  //...
-})
-```
-```xml
-// pageA.wxml
-<view>{{globalStore.title}}</view>
-```
-
-
-#### store 联动
-某些时候局部的store需要依赖其他store，为了能联动多个store，您可以这样做：
-```JavaScript
-// pageA.js
-import globalStore from './global'
-
-let disposer
-class Store{
-  constructor(){
-    // 在构造函数中建立依赖
-    disposer = autorun(()=>{
-      this.title = globalStore.title
-    })
-  }
-
-  get myTitle(){
-    return `my ${this.title}`
-  }
-}
-decorate(Store, {
-  title: observable,
-  myTitle: computed,
-})
-
-Page({
-  onUnload(){
-    // 在卸载页面时销毁 globalStore.title 依赖
-    disposer()
-  },
-  onLoad() {
-    inject(this, { store: new Store()})
-    // ...
-  }
-  //...
-})
-```
 
 -------
 ## API
 
-### inject(context,Object)
-
-参数：
-
-- context:this
-- Object:stores
+### inject(context,props)
 
 返回一个销毁器函数（在 Page 中使用时将自动在 onUnload 生命周期执行,但在 Component 构造器中使用时请确保在生命周期结束时手动调用此函数）。
-
-感谢[westore](https://github.com/Tencent/westore)共享的JSON Diff库代码。
 
 ## License
 

@@ -4,18 +4,15 @@ import globalStore from "../global";
 
 // store
 class Store {
-  name = "liliangyun";
   seconds = 0;
   get color() {
     return this.seconds % 2 === 0 ? "red" : "green";
   }
-  // 递增
   tick = () => {
     this.seconds += 1;
   };
 }
 decorate(Store, {
-  name: observable,
   seconds: observable,
   color: computed,
   tick: action
@@ -25,10 +22,9 @@ decorate(Store, {
 Page({
   onLoad() {
     inject(this, { store: new Store(), globalStore });
-    const { store } = this.props;
-    setInterval(function() {
-      store.tick();
-    }, 1000);
+  },
+  add() {
+    const { store, globalStore } = this.props;
+    store.tick();
   }
-  //...
 });

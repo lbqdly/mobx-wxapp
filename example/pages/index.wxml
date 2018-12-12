@@ -1,4 +1,3 @@
-{{globalStore.name}}
-<view style="color:{{store.color}}">
-    seconds:{{store.seconds}}
-</view>
+<view>{{ title }} :</view>
+<view style="color:{{color}}"> seconds:{{ seconds }} </view>
+<button bindtap="add">add</button>

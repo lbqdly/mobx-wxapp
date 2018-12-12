@@ -1,6 +1,6 @@
 {
   "name": "mobx-wxapp",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "在小程序中使用mobx",
   "main": "example/mobx-wxapp.js",
   "scripts": {
@@ -24,6 +24,5 @@
     "url": "https://github.com/b5156/mobx-wxapp/issues"
   },
   "homepage": "https://github.com/b5156/mobx-wxapp#readme",
-  "dependencies": {
-  }
+  "dependencies": {}
 }

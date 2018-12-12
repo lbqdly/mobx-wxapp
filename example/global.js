@@ -1,7 +1,7 @@
 import { observable} from "./mobx";
 
 const globalStore = observable({
-  name: "mini program"
+  title: "mobx-wxapp example"
 });
 
 export default globalStore;
