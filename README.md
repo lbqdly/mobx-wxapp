@@ -36,7 +36,8 @@ Page({
 pages/index.wxml:
 
 ```xml
-<view style="color:{{color}}"> seconds:{{ seconds }} </view>
+<view>{{ title }} :</view>
+<view style="color:{{ color }}"> seconds:{{ seconds }} </view>
 <button bindtap="add">add</button>
 ```
 stores/global.store.js
