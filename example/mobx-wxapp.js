@@ -1,5 +1,5 @@
 /*https://github.com/b5156/mobx-wxapp*/
-import { autorun, toJS, isObservableObject } from "./mobx";
+import { autorun, toJS, isObservableObject } from "mobx";
 const DELAY = 30;
 
 function inject(context, props) {
