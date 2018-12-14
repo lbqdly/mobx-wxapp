@@ -7,4 +7,4 @@ yarn-error.log
 
 # Build directory
 .DS_Store
-package-lock\.json
+package-lock.json
