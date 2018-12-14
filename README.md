@@ -2,7 +2,7 @@
 
 在小程序中使用[mobx](https://github.com/mobxjs/mobx)，`connect`函数可将被观察的数据高效的绑定到小程序视图。
 
-旧的`inject`方式见 [v1](https://github.com/b5156/mobx-wxapp)
+旧的`inject`方式见[v1](https://github.com/b5156/mobx-wxapp/tree/v1)
 
 ### 安装
 
