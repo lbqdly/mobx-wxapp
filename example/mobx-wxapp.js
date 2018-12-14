@@ -1,50 +1,53 @@
-/*https://github.com/b5156/mobx-wxapp*/
-import { autorun, toJS, isObservableObject } from "./mobx";
-const DELAY = 30;
+/* https://github.com/b5156/mobx-wxapp */
+import {
+  autorun,
+  isObservableObject,
+  isObservableArray,
+  isBoxedObservable,
+  isObservableMap,
+  toJS
+} from "mobx";
 
-function inject(context, props) {
-  if (typeof props !== "object") {
-    throw new TypeError("参数必须是一个 Object 对象");
+function connect(context, mapStateToProps, options = {}) {
+  if (!isTypeFunction(mapStateToProps)) {
+    throw new TypeError("mapStateToProps 必须是一个function");
   }
-  context.props = props;
+
+  const delay = options.delay || 30; //setData执行的最小间隔
+  const callback = options.setDataCallback || (() => {}); //setData的回调
+
   let tempdata = {};
   let last = 0;
   const update = nextdata => {
-    //console.log(nextdata);
     Object.assign(tempdata, nextdata);
     clearTimeout(last);
     last = setTimeout(() => {
-      const changed = diff(context.data, tempdata);
+      const newValue = diff(context.data, tempdata);
       // console.log("new data:", changed);
-      context.setData(changed);
+      context.setData(newValue, () => {
+        callback(newValue);
+      });
       tempdata = {};
-    }, DELAY);
+    }, delay);
   };
-  const disposers = [];
-  Object.keys(props).forEach(key => {
-    let prop = props[key];
-    if (!isObservableObject(prop)) {
-      throw new TypeError("参数必须是一个 ObservableObject 对象");
+  const func = mapStateToProps;
+  mapStateToProps = function() {
+    const data = func();
+    for (let k in data) {
+      const item = data[k];
+      if (
+        isObservableObject(item) ||
+        isObservableArray(item) ||
+        isObservableObject(item) ||
+        isBoxedObservable(item) ||
+        isObservableMap(item)
+      ) {
+        data[k] = toJS(item);
+      }
     }
-    disposers.push(
-      autorun(() => {
-        const data = {};
-        const displayKeys = Object.getOwnPropertyNames(prop).filter(
-          key =>
-            key !== "$mobx" &&
-            key !== "__mobxDidRunLazyInitializers" &&
-            typeof prop[key] !== "function"
-        );
-        displayKeys.forEach(k => {
-          data[k] = toJS(prop[k]);
-        });
-        update(data);
-      })
-    );
-  });
-  const disposer = () => {
-    disposers.forEach(d => d());
+    update(data);
   };
+  const disposer = autorun(mapStateToProps);
   const onUnload = context.onUnload;
   if (onUnload) {
     context.onUnload = function() {
@@ -54,7 +57,6 @@ function inject(context, props) {
   }
   return disposer;
 }
-
 function diff(ps, ns) {
   const value = {};
   for (let k in ns) {
@@ -68,7 +70,6 @@ function diff(ps, ns) {
   }
   return value;
 }
-
 function equals(x, y) {
   const in1 = x instanceof Object;
   const in2 = y instanceof Object;
@@ -89,5 +90,8 @@ function equals(x, y) {
   }
   return true;
 }
+function isTypeFunction(fn) {
+  return typeof fn === "function";
+}
 
-export { inject };
+export { connect };
