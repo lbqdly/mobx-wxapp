@@ -102,7 +102,7 @@ mapStateToProps:Function
 
 //可选参数
 options:Object
-+ delay:Number,// setData的执行间隔,默认30ms
++ delay:Number,// setData的最小执行间隔,默认30ms
 + setDataCallback:Function // setData的执行回调
 ```
 返回值:`connect`返回一个销毁器函数（在 Page 中使用时将自动在 onUnload 生命周期执行,但在 Component 构造器中使用时请确保在生命周期结束时手动调用此函数）。
