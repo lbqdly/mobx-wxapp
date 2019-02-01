@@ -1,22 +1,39 @@
-import { connect } from "../mobx-wxapp";
-import globalStore from "../stores/global.store";
-import indexStore from "../stores/index.store";
+import { connect, extract } from '../mobx-wxapp'
+import { observable } from '../mobx'
+
+const appStore = observable({
+  title: 'mobx-wxapp'
+})
+
+const store = observable({
+
+  // observable
+  seconds: 0,
+
+  // computed
+  get color() {
+    return this.seconds % 2 ? 'red' : 'green'
+  },
+
+  // actions
+  tick() {
+    this.seconds += 1
+  }
+})
 
 // page
 Page({
   onLoad() {
-    connect(this,() => ({
-        title: globalStore.title,
-        seconds: indexStore.seconds,
-        color: indexStore.color
-      }),{
-        setDataCallback: changed => {
-          console.log(changed);
-        }
-      }
-    );
+    connect(this, () => ({
+        title: appStore.title,
+
+        color: store.color,
+        seconds: store.seconds
+        // ...extract(store) //或使用 extract 提取全部属性
+      })
+    )
   },
   add() {
-    indexStore.tick();
+    store.tick()
   }
-});
+})

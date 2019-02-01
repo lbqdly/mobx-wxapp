@@ -15,23 +15,46 @@
 pages/index.js:
 
 ```JavaScript
-import { connect } from "../mobx-wxapp";
-import globalStore from "../stores/global.store";
-import indexStore from "../stores/index.store";
+import { connect, extract } from '../mobx-wxapp'
+import { observable } from '../mobx'
 
+const appStore = observable({
+  title: 'mobx-wxapp'
+})
+
+const store = observable({
+
+  // observable
+  seconds: 0,
+
+  // computed
+  get color() {
+    return this.seconds % 2 ? 'red' : 'green'
+  },
+
+  // actions
+  tick() {
+    this.seconds += 1
+  }
+})
+
+// page
 Page({
   onLoad() {
-    const mapStateToProps = () =>({
-        title: globalStore.title,
-        seconds: indexStore.seconds,
-        color: indexStore.color
-    })
-    connect(this,mapStateToProps/*, options */);
+    connect(this, () => ({
+        title: appStore.title,
+
+        color: store.color,
+        seconds: store.seconds
+        // ...extract(store) //或使用 extract 提取全部属性
+      })
+    )
   },
   add() {
-    indexStore.tick();
+    store.tick()
   }
-});
+})
+
 ```
 pages/index.wxml:
 
@@ -40,38 +63,6 @@ pages/index.wxml:
 <view style="color:{{ color }}"> seconds:{{ seconds }} </view>
 <button bindtap="add">add</button>
 ```
-stores/global.store.js
-
-```JavaScript
-import { observable} from "../mobx";
-const globalStore = observable({
-  title: "mobx-wxapp example"
-});
-export default globalStore;
-```
-
-stores/index.store.js
-
-```JavaScript
-import { observable, computed, action, decorate } from "../mobx";
-class Store {
-  seconds = 0;
-  get color() {
-    return this.seconds % 2 === 0 ? "red" : "green";
-  }
-  tick = () => {
-    this.seconds += 1;
-  };
-}
-decorate(Store, {
-  seconds: observable,
-  color: computed,
-  tick: action
-});
-export default new Store();
-```
-
-
 
 当然，您也可在 Component 中使用:
 
@@ -79,7 +70,7 @@ export default new Store();
 Component({
   //..
   ready(){
-    this.disposer = connect(this,mapStateToProps,options)
+    this.disposer = connect(this,mapDataToStore,options)
   },
 
   //请务必在组件生命周期结束前执行销毁器!
@@ -92,20 +83,25 @@ Component({
 
 ## API
 
-### connect(context,mapStateToProps,options?)
+### connect(context,mapDataToStore,options?)
++ context:Object // 请传入this
++ mapDataToStore:Function //需要绑定到视图的映射函数
++ options:Object // 可选参数
+
 ```
-//请传入this
-context:Object,
-
-//需要绑定到视图的映射值
-mapStateToProps:Function 
-
-//可选参数
-options:Object
-+ delay:Number,// setData的最小执行间隔,默认30ms
-+ setDataCallback:Function // setData的执行回调
+options = {
+  delay:Number,// setData的最小执行间隔,默认30ms
+  setDataCallback:Function // setData的执行回调
+}
 ```
 返回值:`connect`返回一个销毁器函数（在 Page 中使用时将自动在 onUnload 生命周期执行,但在 Component 构造器中使用时请确保在生命周期结束时手动调用此函数）。
+
+### extract(store)
+映射整个store的快捷方式
++ store:Object // 一个被观察的store对象
+
+返回值:一个可被映射到data的对象
+
 
 ## License
 
