@@ -46,7 +46,8 @@ Page({
 
         color: store.color,
         seconds: store.seconds
-        // ...extract(store) //或使用 extract 提取全部属性
+        // or 
+        // ...extract(store) //使用 extract 一次性提取全部属性
       })
     )
   },
@@ -98,7 +99,7 @@ options = {
 
 ### extract(store)
 映射整个store的快捷方式
-+ store:Object // 一个被观察的store对象
++ store:Object // 一个被观察的store对象
 
 返回值:一个可被映射到data的对象
 
