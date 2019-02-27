@@ -191,4 +191,4 @@ function compareObj(objA, objB, flag) {
 	}
 	return flag
 }
-export { connect, extract, compare }
+export { connect, extract, equals }
