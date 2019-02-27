@@ -2,7 +2,6 @@
 /**
  *  // example:
  *  import { observable } from 'mobx'
- * 
  *  const store = observable({
  *     // observable
  *    seconds: 0,
@@ -56,8 +55,8 @@ function connect(context, mapDataToStore, options = {}) {
     throw new TypeError('mapDataToStore 必须是一个function')
   }
 
-  const delay = options.delay || 30 //setData执行的最小间隔
-  const callback = options.setDataCallback || (() => {}) //setData的回调
+  const delay = options.delay || 30 // setData执行的最小间隔
+  const callback = options.setDataCallback || (() => {}) // setData的回调
 
   let tempdata = {}
   let last = 0
@@ -66,7 +65,7 @@ function connect(context, mapDataToStore, options = {}) {
     clearTimeout(last)
     last = setTimeout(() => {
       const newValue = diff(context.data, tempdata)
-      // console.log("new data:", newValue);
+      console.log('new data:', newValue)
       context.setData(newValue, () => {
         callback(newValue)
       })
@@ -113,26 +112,7 @@ function diff(ps, ns) {
   }
   return value
 }
-function equals(x, y) {
-  const in1 = x instanceof Object
-  const in2 = y instanceof Object
-  if (!in1 || !in2) {
-    return x === y
-  }
-  if (Object.keys(x).length !== Object.keys(y).length) {
-    return false
-  }
-  for (let p in x) {
-    const a = x[p] instanceof Object
-    const b = y[p] instanceof Object
-    if (a && b) {
-      return equals(x[p], y[p])
-    } else if (x[p] !== y[p]) {
-      return false
-    }
-  }
-  return true
-}
+
 function isTypeFunction(fn) {
   return typeof fn === 'function'
 }
@@ -155,4 +135,60 @@ function extract(store) {
   return mapToData
 }
 
-export { connect, extract }
+function isObj(object) {
+	return object && typeof (object) == 'object' && Object.prototype.toString.call(object).toLowerCase() == '[object object]'
+	}
+function isArray(object) {
+	return object && typeof (object) == 'object' && object.constructor == Array
+}
+function getLength(object) {
+	var count = 0
+	for (var i in object) count++
+	return count
+}
+/**
+ * 比较两个对象是否相等
+ * @param {*} objA
+ * @param {*} objB
+ */
+function equals(objA, objB) {
+	if (objA === objB) return true
+	if (!isObj(objA) || !isObj(objB)) return false // 判断类型是否正确
+	if (getLength(objA) != getLength(objB)) return false // 判断长度是否一致
+	return compareObj(objA, objB, true) // 默认为true
+}
+function compareObj(objA, objB, flag) {
+	for (var key in objA) {
+		// 跳出整个循环
+		if (!flag) break
+		if (!objB.hasOwnProperty(key)) {
+			flag = false
+			break
+		}
+		if (!isArray(objA[key])) {
+			// 子级不是数组时,比较属性值
+			if (objB[key] != objA[key]) {
+				flag = false
+				break
+			}
+		} else {
+			if (!isArray(objB[key])) {
+				flag = false
+				break
+			}
+			var oA = objA[key]
+			var oB = objB[key]
+			if (oA.length != oB.length) {
+				flag = false
+				break
+			}
+			for (var k in oA) {
+				// 这里跳出循环是为了不让递归继续
+				if (!flag) break
+				flag = compareObj(oA[k], oB[k], flag)
+			}
+		}
+	}
+	return flag
+}
+export { connect, extract, compare }
