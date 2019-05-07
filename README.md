@@ -1,7 +1,6 @@
 # mobx-wxapp
 
 在小程序中使用[mobx](https://github.com/mobxjs/mobx)，`connect`函数可将被观察的数据高效的绑定到小程序视图。
-
 旧的`inject`方式见[v1](https://github.com/b5156/mobx-wxapp/tree/v1)
 
 ### 安装
@@ -43,11 +42,10 @@ Page({
   onLoad() {
     connect(this, () => ({
         title: appStore.title,
-
         color: store.color,
         seconds: store.seconds
-        // or 
-        // ...extract(store) //使用 extract 一次性提取全部属性
+        // 或者使用 extract 一次性提取全部属性
+        // ...extract(store)
       })
     )
   },
@@ -103,6 +101,9 @@ options = {
 
 返回值:一个可被映射到data的对象
 
+## 应用
+![蓉票儿](http://misc.fapiaoer.cn/rongpiaoer/rqqrcode.jpeg)
+![云票儿](http://misc.fapiaoer.cn/wxapp-yunpiaoer2b/yp2bqrcode.jpeg)
 
 ## License
 
