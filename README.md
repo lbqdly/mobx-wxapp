@@ -103,7 +103,7 @@ options = {
 
 ## 应用
 <img src="http://misc.fapiaoer.cn/wxapp-yunpiaoer2b/yp2bqrcode.jpeg" width = '100' height = '100' />
-<img src="http://misc.fapiaoer.cn/wxapp-yunpiaoer2b/rpqrcode.jpeg" width = '100' height = '100' />
+<img src="http://misc.fapiaoer.cn/rongpiaoer/rpqrcode.jpeg" width = '100' height = '100' />
 
 ## License
 
