@@ -102,8 +102,8 @@ options = {
 返回值:一个可被映射到data的对象
 
 ## 应用
-![蓉票儿](http://misc.fapiaoer.cn/rongpiaoer/rqqrcode.jpeg)
-![云票儿](http://misc.fapiaoer.cn/wxapp-yunpiaoer2b/yp2bqrcode.jpeg)
+![蓉票儿](http://misc.fapiaoer.cn/rongpiaoer/rq.jpg)
+![云票儿](http://misc.fapiaoer.cn/wxapp-yunpiaoer2b/yp2b.jpg)
 
 ## License
 
