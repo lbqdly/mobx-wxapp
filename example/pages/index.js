@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { connect, extract } from '../mobx-wxapp'
 import { observable } from '../mobx'
 
@@ -11,29 +12,29 @@ const store = observable({
   seconds: 0,
 
   // computed
-  get color() {
+  get color () {
     return this.seconds % 2 ? 'red' : 'green'
   },
 
   // actions
-  tick() {
+  tick () {
     this.seconds += 1
   }
 })
 
 // page
 Page({
-  onLoad() {
+  onLoad () {
     connect(this, () => ({
-        title: appStore.title,
+      title: appStore.title,
 
-        color: store.color,
-        seconds: store.seconds
-        // ...extract(store) //或使用 extract 提取全部属性
-      })
+      color: store.color,
+      seconds: store.seconds
+      // ...extract(store) //或使用 extract 提取全部属性
+    })
     )
   },
-  add() {
+  add () {
     store.tick()
   }
 })
